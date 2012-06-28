@@ -1,7 +1,7 @@
 iPhoto Exporter
 ===============
 
-iPhoto Exporter allows you to easily extract pictures from iPhoto events.
+iPhoto Exporter allows you to easily extract pictures from iPhoto events. You can download a standalone version from the downloads section https://github.com/nbonamy/iPhoto-Exporter/downloads.
 
 Running iPhoto Exporter
 -----------------------
@@ -24,10 +24,8 @@ For instance, using the mask '[Y]/[Y-m-d] %s' and setting the root to '/Volumes/
 Packaging iPhoto Exporter
 -------------------------
 
-You can run the build.sh script to create a standalone version of iPhoto Exporter. This is far from being a native MacOS X application but at least it allows you to run iPhoto Exporter with a single double-click if you do not want to go through the hassle of setting up Apache and PHP properly on your Mac.
+You can run the build.sh script to create a standalone version of iPhoto Exporter. You need XCode 4 to be installed as this will be needed to compile the launcher application. Once compiled and bundled, the install script will copy a PHP 5.4 that includes a standalone webserver and the PHP scripts.
 
-The application bundle will be created on your desktop but you can of course decide to move it to your Applications folder. When you double-click the application, it will:
-* Run a standalone PHP web server (embedded in the application)
-* Open a new and fresh Safari window running iPhoto Exporter
-* Wait for you to qui Safari and shutdown the PHP web server
+When the application is run, the PHP webserver is started and a WebView is displayed showing iPhoto Exporter.
+
 
