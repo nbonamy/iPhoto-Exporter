@@ -17,6 +17,11 @@ header {
   height: 64px;
 }
 
+a.neutral, a.neutral:visited, a.neutral:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
 #logo {
   float: left;
   width: 64px;
