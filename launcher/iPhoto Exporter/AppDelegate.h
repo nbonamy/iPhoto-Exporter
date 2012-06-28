@@ -14,6 +14,7 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (strong) IBOutlet NSProgressIndicator *spinner;
 @property (strong) IBOutlet WebView *webview;
 
 @end

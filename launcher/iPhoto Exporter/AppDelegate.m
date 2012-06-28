@@ -11,6 +11,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize spinner = _spinner;
 @synthesize webview = _webview;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -25,7 +26,17 @@
 	NSArray* args = [NSArray arrayWithObjects:@"-S", @"localhost:6472", @"-t", src, nil];
 	webserver = [NSTask launchedTaskWithLaunchPath:php arguments:args];
 	
-	// now set web view
+	// now wait a bit and set web view
+	[self.spinner startAnimation:nil];
+	[NSTimer scheduledTimerWithTimeInterval:2.0
+																	 target:self
+																 selector:@selector(loadWebview)
+																 userInfo:nil
+																	repeats:NO];
+}
+
+- (void) loadWebview {
+	[self.spinner setHidden:YES];
 	[[self.webview mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:6472/index.php"]]];
 }
 
