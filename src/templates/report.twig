@@ -1,6 +1,7 @@
 {% set error = 0 %}
 {% set warning = 0 %}
-<table class="table report">
+<a id="show_report" href="#">Show detailed report</a>
+<table class="table report" hidden>
 <thead>
 	<tr>
 		<th class="left">Event</th>
@@ -42,6 +43,7 @@
 <script>
 {% if error == 1 %}
 	$('#report').addClass('alert-error');
+	$('#show_report').click().hide();
 {% elseif warning == 1 %}
 	$('#report').addClass('alert-block');
 {% else %}

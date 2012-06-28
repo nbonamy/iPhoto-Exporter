@@ -4,6 +4,12 @@ $(document).ready(function() {
 	// default thumbnail
 	$('#thumb').loadThumb(g_default_thumb, null);
 	
+	// report display
+	$(document).on('click', '#show_report, table.report', function() {
+		$('#show_report').toggle();
+		$('table.report').toggle();
+	})
+	
   // abort
   $('#abort').on('click', function() {
     if ($(this).hasClass('loading') == false) {
