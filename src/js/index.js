@@ -88,7 +88,7 @@ $(document).ready(function() {
   
   // options
   $('#options form').ajaxForm(function() {
-  	$('#options').modal('hide');
+		$('#options').modal('hide');
   });
 
   // clear alerts on options

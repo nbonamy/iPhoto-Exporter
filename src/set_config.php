@@ -4,8 +4,8 @@
 require_once('includes/iphoto2mac.php');
 
 // update config
-Globals::$Config->set(CFG_SECTION_MAIN, CFG_TARGET_ROOT_FOLDER, $_REQUEST['target_root']);
-Globals::$Config->set(CFG_SECTION_MAIN, CFG_TARGET_FOLDER_MASK, $_REQUEST['target_mask']);
-Globals::$Config->set(CFG_SECTION_MAIN, CFG_OVERWRITE_ALWAYS, Globals::$Config->toBool(is_checked($_REQUEST['overwrite_always'])));
-Globals::$Config->set(CFG_SECTION_MAIN, CFG_DELETE_OBSOLETE, Globals::$Config->toBool(is_checked($_REQUEST['delete_obsolete'])));
+update_string_config_from_request('target_root', CFG_TARGET_ROOT_FOLDER);
+update_string_config_from_request('target_mask', CFG_TARGET_FOLDER_MASK);
+update_bool_config_from_request('overwrite_always', CFG_OVERWRITE_ALWAYS);
+update_bool_config_from_request('delete_obsolete', CFG_DELETE_OBSOLETE);
 Globals::$Config->save();
