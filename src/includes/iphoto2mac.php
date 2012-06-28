@@ -28,7 +28,7 @@ date_default_timezone_set('UTC');
 file_put_contents(PID_FILE, getmypid());
 
 // twig
-require_once('vendor/Twig/Autoloader.php');
+require_once('vendor/Twig/lib/Twig/Autoloader.php');
 Twig_Autoloader::register();
 
 function render($tmpl, $args = array()) {
