@@ -1,0 +1,79 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>iPhoto Exporter {% block title %}{% endblock %}</title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/iphoto2mac.css?v={{ random() }}">
+  {% block stylesheets %}{% endblock %}
+
+  <script src="js/libs/modernizr-2.5.3.min.js"></script>
+</head>
+<body>
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+  <header>
+    {% block header %}
+      <img id="logo" src="img/iphoto2mac.png"/>
+      <h2>iPhoto Exporter</h2>
+      <h4>Easy export of iPhoto events</h4>
+    {% endblock %}
+  </header>
+
+  {% if error is not empty %}
+    <div class="alert alert-error">
+      {% for err in error %}
+        <div>{{ err }} </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if warning is not empty %}
+    <div class="alert alert-block">
+      {% for warn in warning %}
+        <div>{{ warn }} </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if success is not empty %}
+    <div class="alert alert-success">
+      {% for succ in success %}
+        <div>{{ succ }} </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div role="main">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer>
+    {% block footer %}{% endblock %}
+  </footer>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+  <script src="js/libs/bootstrap.min.js"></script>
+  <script src="js/libs/mustache.js"></script>
+  <script src="js/plugins.js?v={{ random() }}"></script>
+  <script src="js/iphoto2mac.js?v={{ random() }}"></script>
+
+  {% block scripts %}{% endblock %}
+
+
+  <script>
+    {% block script %}{% endblock %}
+  </script>
+
+</body>
+</html>

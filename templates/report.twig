@@ -1,0 +1,50 @@
+{% set error = 0 %}
+{% set warning = 0 %}
+<table class="table report">
+<thead>
+	<tr>
+		<th class="left">Event</th>
+		<th>Items</th>
+		<th>Success</th>
+		<th>Skipped</th>
+		<th>Deleted</th>
+		<th>Not&nbsp;found</th>
+		<th>Errors</th>
+		<th>Status</th>
+	</tr>
+</thead>
+<tbody>
+	{% for report in reports %}
+		<tr>
+			<td class="left" rel="tooltip" title="{{ report.roll.title }}">{{ report.roll.name }}</td>
+			<td>{{ report.roll.count }}</td>
+			<td>{{ report.success }}</td>
+			<td>{{ report.skipped }}</td>
+			<td>{{ report.deleted }}</td>
+			<td>{{ report.notfound }}</td>
+			<td>{{ report.errors }}</td>
+			<td>
+				{% if report.errors != 0 %}
+					{% set error = 1 %}
+					<span class="label label-important">Error</span>
+				{% elseif report.success + report.skipped != report.roll.count or report.notfound != 0 %}
+					{% set warning = 1 %}
+					<span class="label label-warning">Warning</span>
+				{% else %}
+					<span class="label label-success">Success</span>
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+</tbody>
+</table>
+
+<script>
+{% if error == 1 %}
+	$('#report').addClass('alert-error');
+{% elseif warning == 1 %}
+	$('#report').addClass('alert-block');
+{% else %}
+	$('#report').addClass('alert-success');
+{% endif %}
+</script>

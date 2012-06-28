@@ -1,0 +1,64 @@
+
+{% extends 'iphoto2mac.twig' %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="css/export.css?v={{ random() }}">
+{% endblock %}
+
+{% block content %}
+
+  {% if error is empty %}
+
+    <div id="inner">
+
+	  	{% if session.dryrun == 1 %}
+				<div id="dryrun" class="alert alert-error">
+					Dry run!
+				</div>
+			{% endif %}
+
+      <div class="well">
+
+        <div id="current">
+          <img id="thumb" src="img/roll.png">
+        </div>
+
+        <div class="progress progress-striped active">
+          <div id="progress" class="bar" style="width:0%;"></div>
+        </div>
+        <div id="title">Starting</div>
+        <div id="status" hidden>Processed <span id="processed">0</span> out of <span id="total">0</span></div>
+
+      </div>
+
+			<div id="report" class="alert" hidden>
+			</div>
+
+      <div>
+        <a id="abort" class="btn btn-danger">Abort</a>
+		  	{% if session.dryrun == 1 %}
+		  		<form id="fullrun" action="export.php" method="post" hidden>
+		  			<input type="hidden" name="fullrun" value="1" />
+		  			<button id="submit" type="submit" class="btn btn-primary">Export</button>
+		  		</form>
+		  	{% endif %}
+		  	<a id="log" class="btn btn-info" href="data/iphoto2mac.txt?v={{ random() }}" target="_blank" hidden>Show log</a>
+        <a id="back" class="btn" href="index.php" hidden>Back</a>
+      </div>
+
+    </div>
+
+  {% else %}
+
+
+    <a id="back" class="btn" href="index.php">Back</a>
+
+  {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+  {% if error is empty %}
+    <script src="js/export.js?v={{ random() }}"></script>
+  {% endif %}
+{% endblock %}

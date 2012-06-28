@@ -1,0 +1,100 @@
+
+{% extends 'iphoto2mac.twig' %}
+
+{% block header %}
+	<a class="btn" data-toggle="modal" href="#options" >Options</a>
+	{{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="css/index.css?v={{ random() }}">
+{% endblock %}
+
+{% block content %}
+
+  <script id="tmpl_roll" type="text/template">
+    {% raw %}
+      <div class="roll" data-id="{{id}}">
+        <input type="checkbox" name="roll_{{id}}" />
+        <img class="untag" src="img/toggle-small.png" title="Mark as exported" alt="Mark as exported" />
+        <span class="title">{{title}}</span>
+        <span class="badge">{{count}}</span>
+    {% endraw %}
+  </script>
+
+	<div class="modal fade hide" id="options">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal">×</button>
+	    <h3>Options</h3>
+	  </div>
+	  <div class="modal-body">
+	  	<table>
+	  		<tbody>
+	  			<tr>
+	  				<td class="fld-label">Target root folder</td>
+	  				<td class="fld-value"><input name="target_root" value="{{ config.main.target_root }}"/></td>
+	  			</tr>
+	  			<tr>
+	  				<td class="fld-label">Target folder mask</td>
+	  				<td class="fld-value"><input name="target_mask" value="{{ config.main.target_mask }}"/></td>
+	  			</tr>
+	  			<tr>
+	  				<td class="fld-label"><input type="checkbox" name="overwrite_always" {% if config.main.overwrite_always == 'yes' %}checked{% endif %}/></td>
+	  				<td class="fld-value">Always overwrite target files</td>
+	  			</tr>
+	  			<tr>
+	  				<td class="fld-label"><input type="checkbox" name="delete_obsolete" {% if config.main.delete_obsolete == 'yes' %}checked{% endif %}/></td>
+	  				<td class="fld-value">Clean-up target folder (delete obsolete files)</td>
+	  			</tr>
+	  			<tr class="actions">
+	  				<td class="fld-label">&nbsp;</td>
+	  				<td class="fld-value">
+	  					<button id="clear" class="btn btn-danger">Clear history</button>
+	  					<button id="mark" class="btn btn-warning">Mark all events exported</button>
+	  				</td>
+	  			</tr>
+	  		</tbody>
+	  	</table>
+	  </div>
+	  <div class="modal-footer">
+	    <a href="#" class="btn" data-dismiss="modal">Close</a>
+	    <a href="#" id="save" class="btn btn-primary">Save changes</a>
+	  </div>
+	</div>
+
+  <div id="loading">
+    <a href="#" class="btn btn-success loading">Loading</a>
+  </div>
+
+  <form action="export.php" method="post">
+  <input type="hidden" name="dryrun" value="0" />
+
+    <div class="pull-right">
+    	<div><button id="submit" type="submit" class="submit btn btn-primary" hidden>Export</button></div>
+    	<div><button id="dryrun" type="submit" class="submit btn btn-success" hidden>Dry run</button></div>
+    </div>
+
+    <div id="rolls_todo">
+    </div>
+
+    <div class="accordion" hidden>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" href="#rolls_done">
+            Previously exported events
+          </a>
+        </div>
+        <div id="rolls_done" class="accordion-body collapse">
+          <div class="accordion-inner">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="js/index.js?v={{ random() }}"></script>
+{% endblock %}

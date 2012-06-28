@@ -1,0 +1,56 @@
+
+header .btn {
+	float: right;
+	margin-top: 16px;
+	margin-right: 32px;
+}
+
+#loading {
+  margin-top: 64px;
+  text-align: center;
+}
+
+form {
+  width: 80%;
+  margin: 16px auto;
+}
+
+form > div {
+  margin-right: 100px;
+}
+
+form > div.pull-right {
+  margin-right: 0;
+  text-align: right;
+}
+
+form > div.pull-right > div {
+	margin-bottom: 4px;
+}
+
+.roll {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.roll input {
+}
+
+.roll .untag {
+  visibility: hidden;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.roll .title {
+  font-weight: bold;
+}
+
+.roll .badge {
+	margin-left: 4px;
+}
+
+#options tr.actions td {
+	padding-top: 16px;
+	padding-bottom: 8px;
+}

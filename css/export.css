@@ -1,0 +1,35 @@
+
+#inner {
+  width: 800px;
+  margin: 0 auto;
+}
+
+#current {
+  float: left;
+  margin-right: 24px;
+  width: 64px;
+  height: 64px;
+	display: block;
+  overflow: hidden;
+}
+
+#thumb {
+	max-width: none;
+}
+
+#title {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+#status {
+  margin-bottom: 12px;
+}
+
+.report th, .report td {
+	text-align: center;
+}
+
+.report th.left, .report td.left {
+	text-align: left;
+}
