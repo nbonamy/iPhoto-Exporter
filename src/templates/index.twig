@@ -10,6 +10,11 @@
   <link rel="stylesheet" href="css/index.css?v={{ random() }}">
 {% endblock %}
 
+{% block scripts %}
+  <script src="js/index.js?v={{ random() }}"></script>
+  <script src="js/libs/jquery.form.js"></script>
+{% endblock %}
+
 {% block content %}
 
   <script id="tmpl_roll" type="text/template">
@@ -28,6 +33,7 @@
 	    <h3>Options</h3>
 	  </div>
 	  <div class="modal-body">
+	  	<form action="set_config.php" method="post">
 	  	<table>
 	  		<tbody>
 	  			<tr>
@@ -39,11 +45,11 @@
 	  				<td class="fld-value"><input name="target_mask" value="{{ config.main.target_mask }}"/></td>
 	  			</tr>
 	  			<tr>
-	  				<td class="fld-label"><input type="checkbox" name="overwrite_always" {% if config.main.overwrite_always == 'yes' %}checked{% endif %}/></td>
+	  				<td class="fld-label"><input type="checkbox" name="overwrite_always" value="1" {% if config.main.overwrite_always == 'yes' %}checked{% endif %}/></td>
 	  				<td class="fld-value">Always overwrite target files</td>
 	  			</tr>
 	  			<tr>
-	  				<td class="fld-label"><input type="checkbox" name="delete_obsolete" {% if config.main.delete_obsolete == 'yes' %}checked{% endif %}/></td>
+	  				<td class="fld-label"><input type="checkbox" name="delete_obsolete" value="1" {% if config.main.delete_obsolete == 'yes' %}checked{% endif %}/></td>
 	  				<td class="fld-value">Clean-up target folder (delete obsolete files)</td>
 	  			</tr>
 	  			<tr class="actions">
@@ -58,8 +64,9 @@
 	  </div>
 	  <div class="modal-footer">
 	    <a href="#" class="btn" data-dismiss="modal">Close</a>
-	    <a href="#" id="save" class="btn btn-primary">Save changes</a>
+	    <button type="submit" class="btn btn-primary">Save changes</button>
 	  </div>
+	  </form>
 	</div>
 
   <div id="loading">
@@ -93,8 +100,4 @@
 
   </form>
 
-{% endblock %}
-
-{% block scripts %}
-  <script src="js/index.js?v={{ random() }}"></script>
 {% endblock %}

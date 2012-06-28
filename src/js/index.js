@@ -86,29 +86,14 @@ $(document).ready(function() {
   	$('input[name=dryrun]').val(0);
   })
   
+  // options
+  $('#options form').ajaxForm(function() {
+  	$('#options').modal('hide');
+  });
+
   // clear alerts on options
   $('#options').on('hidden', function() {
   	$(this).find('.alert').remove();
-  });
-  
-  // options
-  $('#options #save').on('click', function() {
-  	
-  	// get vars
-  	var target_root = $('input[name=target_root]').val();
-  	var target_mask = $('input[name=target_mask]').val();
-  	var overwrite_always = $('input[name=overwrite_always]').is(':checked') ? 'yes' : 'no';
-  	var delete_obsolete = $('input[name=delete_obsolete]').is(':checked') ? 'yes' : 'no';
-  	var data  = 'target_root='+encodeURIComponent(target_root)+'&target_mask='+encodeURIComponent(target_mask);
-  	    data += '&overwrite_always='+overwrite_always+'&delete_obsolete='+delete_obsolete;
-  	
-  	// post
-  	$.ajax({
-  		type: 'post',
-  		url: 'set_config.php',
-  		data: data
-  	})
-  	$('#options').modal('hide');
   });
   
   // clear history
