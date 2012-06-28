@@ -11,9 +11,11 @@ mkdir -p "$ROOT/$TARGET/Contents/MacOS"
 mkdir -p "$ROOT/$TARGET/Contents/Resources"
 
 # copy contents
-rsync -avC --exclude='.*' --exclude='data/*' --include='.htaccess' . "$ROOT/$TARGET/Contents/MacOS"
+rsync -avC --exclude='.*' --exclude='data/*' --include='.htaccess' src/ "$ROOT/$TARGET/Contents/MacOS"
+rsync -avC --exclude='.*' bin/ "$ROOT/$TARGET/Contents/MacOS/bin"
+chmod +x "$ROOT/$TARGET/Contents/MacOS/bin"/*
 
 # move build files
-mv "$ROOT/$TARGET/Contents/MacOS/build/Info.plist" "$ROOT/$TARGET/Contents/"
-mv "$ROOT/$TARGET/Contents/MacOS/build/iphoto2mac.icns" "$ROOT/$TARGET/Contents/Resources/"
+cp "build/Info.plist" "$ROOT/$TARGET/Contents/"
+cp "build/iphoto2mac.icns" "$ROOT/$TARGET/Contents/Resources/"
 

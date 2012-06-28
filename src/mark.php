@@ -23,9 +23,6 @@ if ($id == 'all') {
 
 }
 
-// in cli mode we need to do this
+// save history
 save_history();
-
-// debug
-var_dump(Globals::$History);
 

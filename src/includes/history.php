@@ -13,4 +13,4 @@ if (file_exists(HISTORY_FILE)) {
 function save_history() {
 	file_put_contents(HISTORY_FILE, serialize(Globals::$History), LOCK_EX);
 }
-register_shutdown_function('save_history');
+//register_shutdown_function('save_history');
