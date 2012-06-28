@@ -1,6 +1,6 @@
 <?php
 
-require_once('vendor/Twig/lib/Twig/Autoloader.php');
+require_once('Twig/lib/Twig/Autoloader.php');
 Twig_Autoloader::register();
 
 function render($tmpl, $args = array()) {
