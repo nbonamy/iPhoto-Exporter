@@ -17,6 +17,19 @@ if (strlen(Globals::$Config->getString(CFG_SECTION_MAIN, CFG_TARGET_FOLDER_MASK,
 	Globals::$Error[] = 'Target folder mask cannot be empty. Please go back and check your options.';
 }
 
+// check if root is a properly formated and if is a network drive and is mounted
+$root = Globals::$Config->getString(CFG_SECTION_MAIN, CFG_TARGET_ROOT_FOLDER, DEFAULT_TARGET_ROOT);
+$tokens = explode('/', $root);
+if (strlen($tokens[0]) != 0) {
+	Globals::$Error[] = 'Target root folder must be an absolute path (starting with /). Please go back and check your options.';
+} else if ($tokens[1] == 'Volumes') {
+	if (count($tokens) == 2 || strlen($tokens[2]) == 0) {
+		Globals::$Error[] = '/Volumes is not a valid target root. Please go back and check your options.';
+	} else if (is_dir('/'.$tokens[1].'/'.$tokens[2]) == false) {
+		Globals::$Error[] = 'Target root is located on a (network) drive not currently available. Please mount it or go back and check your options.';
+	}
+}
+
 // error
 if (count(Globals::$Error) > 0) {
 	echo render('export.twig', array('error' => true));
