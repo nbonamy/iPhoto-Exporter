@@ -1,44 +1,61 @@
 
 function load_data() {
 
-	// reset
-	$('#loading').show();
+	// reset content
 	$('#rolls_todo').empty();
-	$('#rolls_done > div').empty();
 	$('.accordion').hide();
+	$('#rolls_done > div').empty();
 	$('.submit').removeClass('disabled').hide();
 	
-  // load data
-  $.getJSON('getrolls.php', function(data) {
-    $.each(data, function(i, roll) {
-      var html_roll = $($('#tmpl_roll').render(roll));
-      if (roll.exported == false) {
-        html_roll.find('input[type=checkbox]').check();
-        html_roll.find('.untag').css('visibility', 'visible');
-        html_roll.find('.badge').addClass('badge-success');
-      }
-      $(roll.exported ? '#rolls_done > div' : '#rolls_todo').append(html_roll);
-    });
-    
-    // show some stuff and activate
-    $('#loading').hide();
-    if ($('#rolls_todo .roll').length == 0) {
-      $('#rolls_todo').append('<div class="alert">No new event to process</div>');
-      $('.submit').addClass('disabled');
-    }
-    if ($('#rolls_done .roll').length > 0) {
-      $('.accordion').show();
-    }
-    $('.submit').show();
-    $('.untag').tooltip();
-  })
+	// buttons
+	$('#loading .loading').show();
+	$('#loading .retry').hide();
+	$('#loading').show();
 	
+  // load data
+	$.ajax({
+		url: 'getrolls.php',
+		dataType: 'json',
+		success: function(data) {
+	    $.each(data, function(i, roll) {
+	      var html_roll = $($('#tmpl_roll').render(roll));
+	      if (roll.exported == false) {
+	        html_roll.find('input[type=checkbox]').check();
+	        html_roll.find('.untag').css('visibility', 'visible');
+	        html_roll.find('.badge').addClass('badge-success');
+	      }
+	      $(roll.exported ? '#rolls_done > div' : '#rolls_todo').append(html_roll);
+	    });
+
+	    // show some stuff and activate
+			$('#loading').hide();
+	    if ($('#rolls_todo .roll').length == 0) {
+	      $('#rolls_todo').append('<div class="alert">No new event to process</div>');
+	      $('.submit').addClass('disabled');
+	    }
+	    if ($('#rolls_done .roll').length > 0) {
+	      $('.accordion').show();
+	    }
+	    $('.submit').show();
+	    $('.untag').tooltip();
+		},
+		error : function() {
+			$('#loading .loading').hide();
+			$('#loading .retry').show();
+		}
+	});
+    
 }
 
 $(document).ready(function() {
   
 	// do this right now
 	load_data();
+	
+	// retry
+	$('#loading .retry').on('click', function() {
+		load_data();
+	});
 	
   // export
   $(document).on('change', '.roll input[type=checkbox]', function() {

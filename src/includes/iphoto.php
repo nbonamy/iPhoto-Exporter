@@ -2,15 +2,20 @@
 
 class iPhoto {
 
+	// local cache
   private static $plist;
-
-
   private static function getPlist() {
 
     // check cached version
     if (iPhoto::$plist == null) {
-      $parser = new plistParser();
-      iPhoto::$plist = $parser->parseFile(ALBUM_XML_LOCATION);
+    	try {
+    		if (file_exists(ALBUM_XML_LOCATION)) {
+	      	$parser = new plistParser();
+	      	iPhoto::$plist = $parser->parseFile(ALBUM_XML_LOCATION);
+    		}
+    	} catch (Exception $e) {
+    		return null;
+    	}
     }
 
     // done
@@ -21,6 +26,9 @@ class iPhoto {
 
     // get plist
     $plist = iPhoto::getPlist();
+    if ($plist == null) {
+    	return null;
+    }
 
     // build rolls array
     $rolls = array();
@@ -44,6 +52,9 @@ class iPhoto {
 
     // get plist
     $plist = iPhoto::getPlist();
+    if ($plist == null) {
+    	return null;
+    }
 
     // build images array
     $images = array();
