@@ -5,7 +5,7 @@
 define('ALBUM_XML_LOCATION', getenv('HOME').'/Pictures/iPhoto Library/AlbumData.xml');
 define('HISTORY_FILE', getenv('HOME').'/.iphoto2mac.history');
 define('CONFIG_FILE', getenv('HOME').'/.iphoto2mac.conf');
-define('LOG_FILE', dirname(__FILE__).'/../log/iphoto2mac.txt');
+define('LOG_FILE', dirname(__FILE__).'/../log/iphoto2mac.log');
 define('PID_FILE', dirname(__FILE__).'/../log/iphoto2mac.pid');
 define('APPLE_BASE_TIMESTAMP', 978307200);
 define('DIR_SEPARATOR', '/');
