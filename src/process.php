@@ -61,10 +61,10 @@ foreach ($rolls as $roll) {
   // destination folder
   $target  = Globals::$Config->getString(CFG_SECTION_MAIN, CFG_TARGET_ROOT_FOLDER, DEFAULT_TARGET_ROOT);
   $target .= DIR_SEPARATOR.$roll->title.DIR_SEPARATOR;
-	
+
   // log
 	_log(PHP_EOL.'[I] "'.$roll->name.'" exported to '.$target);
-	
+
 	// now check
   if (is_dir($target) === false) {
   	_log('[D] Destination folder does not exist');
@@ -183,4 +183,4 @@ foreach ($rolls as $roll) {
 // proper completion
 $_SESSION[SESSION_STATUS] = STATUS_COMPLETED;
 $_SESSION[SESSION_REPORT] = render('report.twig', array('reports' => $reports));
-//include('status.php');
+session_write_close();
