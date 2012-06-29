@@ -3,7 +3,6 @@ DerivedData
 /launcher/build
 /iPhoto Exporter.app
 /src/log/iphoto2mac.pid
-/src/log/iphoto2mac.txt
+/src/log/iphoto2mac.log
 /.settings
-
 iPhoto Explorer.zip
